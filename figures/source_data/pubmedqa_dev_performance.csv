@@ -1,0 +1,13 @@
+backbone,method,canonical,unseen_answer,unseen_decision,permutation_behavior
+Qwen3-0.6B,Direct,57,55,55,variable across permutations
+Qwen3-0.6B,Direct SFT,31,38,35,variable across permutations
+Qwen3-0.6B,Fixed,34,34,34,position-dependent
+Qwen3-0.6B,MedJEV,60,60,60,invariant in all four permutations
+Qwen3-1.7B,Direct,60,53,51,variable across permutations
+Qwen3-1.7B,Direct SFT,34,34,34,variable across permutations
+Qwen3-1.7B,Fixed,31,31,33,position-dependent
+Qwen3-1.7B,MedJEV,72,68,36,"invariant; decision schema exposes a semantic limitation"
+Qwen3.5-4B,Direct,73,73,60,variable across permutations
+Qwen3.5-4B,Direct SFT,87,88,77,"strong, but not invariant in all schemas"
+Qwen3.5-4B,Fixed,28,28,29,position-dependent
+Qwen3.5-4B,MedJEV,80,88,80,invariant in all four permutations

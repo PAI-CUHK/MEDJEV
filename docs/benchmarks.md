@@ -1,49 +1,44 @@
 # Benchmarks and Claims
 
-## Current evidence level
+## Latest PubMedQA development snapshot
 
-The initial research archive demonstrates a runnable prototype and a testable candidate-query interface. It does not establish that dynamic candidates outperform fixed classification, that the system is clinically valid, or that an LLM's factuality is improved in real use.
+This is the current public performance snapshot. The 500-example PubMedQA test split was not accessed.
 
-The preliminary single-seed snapshot shown in the README is retained as context only:
+| Backbone | Method | Canonical | Unseen answer | Unseen decision | Permutation behavior |
+| --- | --- | ---: | ---: | ---: | --- |
+| Qwen3-0.6B | Direct | 57% | 55% | 55% | variable across permutations |
+| Qwen3-0.6B | Direct SFT | 31% | 38% | 35% | variable across permutations |
+| Qwen3-0.6B | Fixed | 34% | 34% | 34% | position-dependent |
+| Qwen3-0.6B | MedJEV | 60% | 60% | 60% | invariant in all four permutations |
+| Qwen3-1.7B | Direct | 60% | 53% | 51% | variable across permutations |
+| Qwen3-1.7B | Direct SFT | 34% | 34% | 34% | variable across permutations |
+| Qwen3-1.7B | Fixed | 31% | 31% | 33% | position-dependent |
+| Qwen3-1.7B | MedJEV | 72% | 68% | 36% | invariant; decision schema exposes a semantic limitation |
+| Qwen3.5-4B | Direct | 73% | 73% | 60% | variable across permutations |
+| Qwen3.5-4B | Direct SFT | 87% | 88% | 77% | strong, but not invariant in all schemas |
+| Qwen3.5-4B | Fixed | 28% | 28% | 29% | position-dependent |
+| Qwen3.5-4B | MedJEV | 80% | 88% | 80% | invariant in all four permutations |
 
-| Route | Accuracy | Interpretation |
-| --- | ---: | --- |
-| Dynamic candidate route | 84.39% | One fixed experiment configuration |
-| Fixed-label control | 84.81% | Comparable control in the same archive |
+The primary metric is identity-restored accuracy averaged over four candidate permutations. The fixed development partition contains 50 examples, so each percentage point represents one example and confidence intervals are wide. Each completed matrix contains 25 development records per schema and permutation.
 
-The small difference should not be described as superiority or non-inferiority. The exact dataset, split, seed, calibration, and checkpoint must accompany any future reported number.
+The strongest current result is Qwen3.5-4B MedJEV: 80% canonical, 88% unseen answer, and 80% unseen decision with invariance across all four permutations. Direct SFT reaches 87%/88% but remains variable across permutations. Qwen3-1.7B MedJEV reaches 72%/68% but drops to 36% on unseen decision, exposing a semantic limitation rather than a uniformly strong result.
 
-## Selected archived highlights
+## Claim boundaries
 
-These values are copied from the internal result summaries used to prepare this public repository. The raw datasets, checkpoints, and result archives are intentionally not included in Git, so these are documented snapshots rather than a fresh public rerun.
+- These are development-only results and are not clinical validation.
+- The 500-example PubMedQA test split was not accessed.
+- The table is not a confidence interval or population-level estimate; the small development set makes percentage differences unstable.
+- Permutation invariance is an interface/semantic robustness property, not proof of medical generalization.
+- No claim is made that MedJEV is best on every metric or backbone.
 
-| Measure | Result | Scope |
-| --- | ---: | --- |
-| Dynamic route calibrated ECE | 0.0141 | Official MedNLI test, n=1,422, seed 17; temperature fitted on development calibration data |
-| MEDJEV v2 unseen-query accuracy | 87.38% +/- 0.87% | Three seeds, direct runtime-query answers over unseen wording |
-| MEDJEV v2 unseen-query NLL/log(K) | 0.4236 +/- 0.0439 | Same three-seed comparison, uncalibrated |
-| Best v2 direct query family | 92.92% +/- 0.33% | `refute` query family; diagnostic slice, not an overall score |
-| Shared/fresh timing ratio | 1.25x-1.82x | 96-query probe, 12 paired conditions, median timing ratio |
-| Candidate-order probe | 0.00% flip rate, max probability delta 0 | 96-query seed-17 probe |
+## Reproduction and provenance
 
-The v2 comparison reports the following direct-query means: original NLI 84.01% +/- 0.77%, `support` 88.28% +/- 0.65%, `refute` 92.92% +/- 0.33%, and `determined` 87.20% +/- 0.53%. The corresponding unseen-query mean is 87.38% +/- 0.87%. These are schema/query slices derived from the same MedNLI relation labels, not independent clinical tasks.
+The public figure is generated from [the supplied source table](../figures/source_data/pubmedqa_dev_performance.csv) by [the local R script](../figures/scripts/pubmedqa_dev_performance.R). The plot source, exported derivatives, data profile, and audit are kept under `figures/`. The source snapshot was supplied as the latest project result; raw PubMedQA records, checkpoints, and private run artifacts remain external.
 
-The shared-execution ratio is a backend timing observation, not a service-level throughput claim. The compared path can change numerical probabilities under BF16; observed category flips ranged from 0.00% to 2.08% and maximum probability drift ranged from 0.0193 to 0.0537 across the paired conditions. Any production claim requires synchronized GPU timing, warm-up policy, p50/p95/p99 latency, throughput, memory, and quality-drift reporting under one fixed workload.
+Before adding future numbers:
 
-The reported 87.38% unseen-query result is a useful research signal, but it must be read with the paired derived baseline in the same archive: the mapped fixed baseline reached 88.23% +/- 0.46% on the corresponding derived comparison. This prevents the result from being presented as proof of a new medical reasoning advantage.
-
-## Required evaluation discipline
-
-Before making a performance claim:
-
-1. Freeze the task, candidate semantics, and evaluation metric.
-2. Separate training, model-selection, calibration, and final test data.
-3. Use multiple seeds or report the single-seed limitation clearly.
-4. Compare against a fixed-label baseline and a simple non-neural baseline.
-5. Check candidate permutation, evidence ablation, and input-order robustness.
-6. Report confidence intervals and failure cases.
-7. Keep clinical validity separate from benchmark accuracy.
-
-## Result artifacts
-
-Result files should be generated from a pinned source commit and a machine-readable manifest. Never select a final model based on the sealed test set. Never merge scores from different routes into one headline result.
+1. Freeze the task, candidate semantics, split, and metric.
+2. Keep training, model selection, calibration, and test data separate.
+3. Report candidate-permutation behavior alongside accuracy.
+4. Preserve the raw source table and the plotting script.
+5. Keep clinical validity separate from benchmark accuracy.

@@ -18,7 +18,7 @@
 
 MEDJEV is an independent JEV-inspired research implementation. It treats a clinical record, a proposed statement, and an explicit candidate meaning set as a programmable evidence-relationship query. The default semantic space is `supported / contradicted / unresolved`; custom candidate sets are accepted but remain unvalidated unless matching calibration metadata exists.
 
-![JEV-inspired MEDJEV architecture](docs/assets/jev-architecture.svg)
+![JEV-inspired MEDJEV architecture](docs/assets/jev-architecture.png)
 
 ## Why this repository exists
 
@@ -127,30 +127,22 @@ src/
 
 The source layout follows the standard `src/` packaging pattern. Public interfaces are intentionally small; training paths and dataset adapters are separate from runtime query objects.
 
-## Evaluation snapshot
+## Latest benchmark snapshot
 
-The chart below is a **preliminary single-seed research snapshot**, retained only to show how results are documented. It is not a clinical validation claim and does not establish superiority.
+Latest PubMedQA development-only snapshot. The 500-example test split was not accessed.
 
-![Preliminary MEDJEV evaluation snapshot](docs/assets/benchmark-summary.svg)
+The primary metric is identity-restored accuracy averaged over four candidate permutations. The fixed development partition has 50 examples; each percentage point is one example, so uncertainty is wide. Completed matrices contain 25 development records per schema and permutation.
 
-More importantly, the repository keeps the evaluation contract explicit: fixed development/calibration splits, held-out test data, candidate-order checks, calibration metadata, and negative results. See [the evaluation protocol](docs/benchmarks.md).
+![Latest MEDJEV PubMedQA development benchmark](docs/assets/pubmedqa-dev-performance.svg)
 
-## Performance highlights
+### Clear advantages in the current snapshot
 
-The following summary collects the strongest currently archived results without presenting them as a leaderboard. The official MedNLI result is a single-seed test evaluation; the unseen-query and shared-execution numbers come from a later three-seed development comparison whose test set had already been used in an earlier iteration. Higher is better for accuracy; lower is better for NLL and ECE.
+- **Qwen3-0.6B:** MedJEV reaches **60% / 60% / 60%** on canonical, unseen-answer, and unseen-decision queries, versus **57% / 55% / 55%** for Direct, while remaining invariant across all four candidate permutations.
+- **Qwen3.5-4B:** MedJEV reaches **80%** on unseen-decision queries versus **77%** for Direct SFT, while remaining invariant across all four candidate permutations.
 
-![MEDJEV performance highlights](docs/assets/performance-highlights.svg)
+The figure shows the complete comparison across all methods and backbones. These are selective performance highlights, not an overall-superiority claim: Direct SFT remains higher on Qwen3.5-4B canonical and unseen-answer accuracy.
 
-| Capability | Best observed result | Scope and interpretation |
-| --- | ---: | --- |
-| Official MedNLI accuracy | **84.81%** fixed control; **84.39%** dynamic route | 1,422 official test records, Qwen3-0.6B, seed 17; dynamic route is not superior in this run |
-| Calibrated dynamic ECE | **1.41%** | Same MedNLI test; temperature fitted on an independent development calibration split |
-| Unseen runtime-query wording | **87.38% +/- 0.87%** | MEDJEV v2 curriculum, three seeds; direct answers over unseen wording, not a new medical task |
-| Unseen-query NLL / log(K) | **0.4236 +/- 0.0439** | Same three-seed v2 comparison; lower is better and values are uncalibrated |
-| Shared execution timing ratio | **1.25x-1.82x** | Median fresh/shared time over 96 queries and 12 conditions; shared BF16 execution showed 0.00%-2.08% category flips |
-| Candidate-order probe | **0.00% flips; max probability delta 0** | 96-query robustness probe; an interface invariant check, not generalization evidence |
-
-The strongest single query-family result was `refute` at **92.92% +/- 0.33%** in the v2 direct-query comparison. It is shown as a diagnostic slice rather than the project headline because query-family difficulty differs. Full definitions, baselines, confidence intervals, and negative results are in [docs/benchmarks.md](docs/benchmarks.md).
+Definitions and figure provenance are in [docs/benchmarks.md](docs/benchmarks.md) and [figures/provenance/pubmedqa_dev_performance.md](figures/provenance/pubmedqa_dev_performance.md).
 
 ## Documentation map
 

@@ -2,6 +2,8 @@
 
 MEDJEV is organized around one narrow contract: relate a supplied record to a supplied statement under an explicit candidate meaning set.
 
+![MEDJEV JEV-inspired architecture](assets/jev-architecture.png)
+
 ## Data flow
 
 ```text

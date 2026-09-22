@@ -1,0 +1,5 @@
+"check","status","detail"
+"required_files","PASS","pdf, svg, tiff, png"
+"physical_contract","PASS","183 x 74 mm"
+"raster_resolution","PASS","600 dpi"
+"svg_raster_embedding","PASS","vector-only or no SVG"
