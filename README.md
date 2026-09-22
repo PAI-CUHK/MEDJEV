@@ -135,6 +135,23 @@ The chart below is a **preliminary single-seed research snapshot**, retained onl
 
 More importantly, the repository keeps the evaluation contract explicit: fixed development/calibration splits, held-out test data, candidate-order checks, calibration metadata, and negative results. See [the evaluation protocol](docs/benchmarks.md).
 
+## Performance highlights
+
+The following summary collects the strongest currently archived results without presenting them as a leaderboard. The official MedNLI result is a single-seed test evaluation; the unseen-query and shared-execution numbers come from a later three-seed development comparison whose test set had already been used in an earlier iteration. Higher is better for accuracy; lower is better for NLL and ECE.
+
+![MEDJEV performance highlights](docs/assets/performance-highlights.svg)
+
+| Capability | Best observed result | Scope and interpretation |
+| --- | ---: | --- |
+| Official MedNLI accuracy | **84.81%** fixed control; **84.39%** dynamic route | 1,422 official test records, Qwen3-0.6B, seed 17; dynamic route is not superior in this run |
+| Calibrated dynamic ECE | **1.41%** | Same MedNLI test; temperature fitted on an independent development calibration split |
+| Unseen runtime-query wording | **87.38% +/- 0.87%** | MEDJEV v2 curriculum, three seeds; direct answers over unseen wording, not a new medical task |
+| Unseen-query NLL / log(K) | **0.4236 +/- 0.0439** | Same three-seed v2 comparison; lower is better and values are uncalibrated |
+| Shared execution timing ratio | **1.25x-1.82x** | Median fresh/shared time over 96 queries and 12 conditions; shared BF16 execution showed 0.00%-2.08% category flips |
+| Candidate-order probe | **0.00% flips; max probability delta 0** | 96-query robustness probe; an interface invariant check, not generalization evidence |
+
+The strongest single query-family result was `refute` at **92.92% +/- 0.33%** in the v2 direct-query comparison. It is shown as a diagnostic slice rather than the project headline because query-family difficulty differs. Full definitions, baselines, confidence intervals, and negative results are in [docs/benchmarks.md](docs/benchmarks.md).
+
 ## Documentation map
 
 - [Architecture](docs/architecture.md): components, invariants, data flow, and extension points.
