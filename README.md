@@ -84,6 +84,17 @@ MEDJEV is intended as reusable research infrastructure across several evidence-g
 
 These are research use cases, not authorization for patient care, automated diagnosis, treatment recommendation, or deployment without an independent clinical, regulatory, privacy, and safety review.
 
+## Related project
+
+[**SLEEPJEV**](https://github.com/PAI-CUHK/SLEEPJEV) is the signal-native companion project for long-horizon polysomnography (PSG) research. It applies the same JEV-inspired separation of shared evidence formation, runtime questions, and candidate-conditioned decisions to sleep and physiological signals.
+
+| Project | Primary evidence | Main research focus |
+| --- | --- | --- |
+| **MEDJEV** | Clinical text and biomedical literature | Runtime semantic decisions, evidence grounding, calibration, and auditable query contracts |
+| **[SLEEPJEV](https://github.com/PAI-CUHK/SLEEPJEV)** | Overnight PSG and physiological signals | Reusable overnight representations, sparse temporal retrieval, and high-query serving |
+
+The repositories are related but independently maintained. MEDJEV provides the general evidence–statement interface; SLEEPJEV specializes that design for reusable, long-duration sleep-signal representations. Neither project is a medical device or a clinical decision system.
+
 ## Why runtime candidate semantics matter
 
 Traditional classification exposes a fixed label set chosen when the model is trained. That is convenient, but it can hide three different failure modes:
