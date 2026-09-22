@@ -31,6 +31,75 @@ Medical language systems often collapse several different questions into one gen
 
 The result is an interface for research on evidence grounding, not a claim that the model knows a patient's diagnosis or risk.
 
+## MEDJEV at a glance
+
+MEDJEV is a research interface for turning evidence–statement relationships into explicit, inspectable decisions. It is designed for cases where the candidate meanings should be supplied at runtime instead of being hidden inside a fixed classifier head.
+
+The central JEV-inspired idea is simple:
+
+```text
+clinical evidence + runtime question + candidate meanings
+                         │
+                         ▼
+              shared evidence representation
+                         │
+                         ▼
+             candidate-conditioned scoring
+                         │
+                         ▼
+                probabilities + audit scope
+```
+
+MEDJEV is an independent implementation of this design direction. It does not claim to be the official JEV software, reproduce a proprietary implementation, or provide clinical validation.
+
+### What can be supplied at runtime
+
+| Object | Meaning | Example |
+| --- | --- | --- |
+| Evidence | The record, article passage, or signal-derived context being examined | A clinical note or PubMedQA passage |
+| Question | The relationship to be evaluated | “Does the evidence support the claim?” |
+| Candidate meanings | The mutually exclusive interpretations to score | `supported`, `contradicted`, `unresolved` |
+| Output contract | A stable, machine-readable decision | Prediction, per-candidate probabilities, calibration scope, and backend |
+
+This separation makes it possible to test semantic changes directly: changing the candidate wording, number of options, or question is a new query contract rather than an invisible change to a label index.
+
+## Research applications
+
+MEDJEV is intended as reusable research infrastructure across several evidence-grounded tasks:
+
+| | Application area | How MEDJEV is used |
+| --- | --- | --- |
+| 🧾 | Clinical text review | Check whether a proposed statement is supported, contradicted, or unresolved by supplied evidence. |
+| 📚 | Biomedical literature | Evaluate claims against passages from PubMedQA, SciFact, or other licensed research datasets. |
+| 🧪 | Benchmark methodology | Compare fixed-label, direct-query, and dynamic-candidate routes under the same query and permutation contracts. |
+| 📊 | Calibration research | Preserve probabilities together with schema and calibration metadata so confidence is not separated from scope. |
+| 🛌 | Sleep and physiological signals | Use the experimental `sleepjev` package for temporal windows, event indexes, and signal-native candidate queries. |
+| 🔍 | Robustness and auditing | Test candidate-order invariance, query isolation, masking behavior, split isolation, and unsupported-claim review guards. |
+
+These are research use cases, not authorization for patient care, automated diagnosis, treatment recommendation, or deployment without an independent clinical, regulatory, privacy, and safety review.
+
+## Why runtime candidate semantics matter
+
+Traditional classification exposes a fixed label set chosen when the model is trained. That is convenient, but it can hide three different failure modes:
+
+1. A model may be correct for the wrong candidate position.
+2. A new wording may be treated as an unrelated label instead of a new semantic query.
+3. A probability may be reported without explaining which schema, calibration split, or execution path produced it.
+
+MEDJEV makes these choices explicit. Candidate meanings are encoded and scored against a shared evidence representation; probabilities are normalized over the supplied candidate set; and the result carries scope metadata. The test suite treats permutation behavior, masking, query isolation, and split isolation as contracts rather than informal expectations.
+
+## Safety and interpretation boundaries
+
+MEDJEV reports a relationship to supplied evidence. Unless a separate task definition and validation protocol establish otherwise, its output is not a disease probability, diagnosis, prognosis, treatment response, prevalence estimate, or patient risk score.
+
+The repository deliberately keeps the following boundaries visible:
+
+- **Evidence grounding is not factuality proof.** A high score means that the model selected a candidate under the supplied schema; it does not prove that the evidence is true or complete.
+- **Calibration is schema-specific.** A temperature or calibration record must not be silently transferred to a new candidate set.
+- **Permutation invariance is an interface property.** It tests whether meaning follows the candidate rather than its position; it is not evidence of clinical generalization.
+- **Development accuracy is not clinical validation.** Public benchmark highlights are small-sample research snapshots and should not be read as deployment evidence.
+- **Restricted material stays external.** Patient text, raw datasets, credentials, checkpoints, and private experiment archives are excluded from this repository.
+
 ## What is included
 
 | Area | Package | Purpose |
