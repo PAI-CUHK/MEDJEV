@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medjev"
+version = "0.1.0"
+description = "JEV-inspired semantic decision interfaces for clinical evidence research"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "scikit-learn>=1.3",
+    "joblib>=1.3",
+    "torch>=2.1",
+    "transformers>=4.51,<5",
+    "safetensors>=0.4",
+]
+keywords = ["medical-ai", "clinical-nlp", "evidence-reasoning", "jEV", "sleep-analysis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+train = ["accelerate>=0.28", "peft>=0.15"]
+sleep = ["pandas>=2.0", "pyedflib>=0.1.38"]
+test = ["pytest>=8", "pytest-cov>=5"]
+dev = ["build>=1", "ruff>=0.8"]
+all = [
+    "accelerate>=0.28",
+    "peft>=0.15",
+    "pandas>=2.0",
+    "pyedflib>=0.1.38",
+    "pytest>=8",
+    "pytest-cov>=5",
+    "build>=1",
+    "ruff>=0.8",
+]
+
+[project.scripts]
+medjev = "medjev.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["medjev*", "sleepjev*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+# E701/E702 are retained for compatibility with compact research scripts that
+# predate this repository's src-layout migration. New modules should avoid them.
+ignore = ["E501", "E701", "E702"]

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" role="img" aria-labelledby="title desc">
+  <title id="title">MEDJEV logo</title>
+  <desc id="desc">A teal evidence-network mark followed by the MEDJEV wordmark.</desc>
+  <defs>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b9f95"/>
+      <stop offset="1" stop-color="#087a83"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="220" rx="28" fill="#ffffff"/>
+  <g transform="translate(28 28)">
+    <rect width="164" height="164" rx="48" fill="url(#mark)"/>
+    <path d="M47 113 72 52h53l-35 36h30l-51 45 16-39z" fill="#ffffff"/>
+    <circle cx="44" cy="48" r="8" fill="#b7f2e9"/>
+    <circle cx="124" cy="124" r="8" fill="#b7f2e9"/>
+    <path d="M49 54 71 78M118 119 99 99" stroke="#b7f2e9" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+  </g>
+  <text x="230" y="137" fill="#103a43" font-family="Arial, Helvetica, sans-serif" font-size="104" font-weight="700" letter-spacing="2">MEDJEV</text>
+  <path d="M235 164h430" stroke="#10a89b" stroke-width="7" stroke-linecap="round"/>
+  <text x="682" y="170" fill="#5f737a" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="1">EVIDENCE</text>
+</svg>
