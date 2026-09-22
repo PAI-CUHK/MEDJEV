@@ -2,7 +2,7 @@
 
 ## Repository workflow
 
-The project uses a `src/` layout, editable installs, focused tests, and GitHub Actions. Keep generated files outside source control.
+The project uses a `src/` layout, editable installs, focused tests, and GitHub Actions. Keep local experiment outputs outside source control.
 
 ```bash
 python -m pip install -e ".[test,dev]"

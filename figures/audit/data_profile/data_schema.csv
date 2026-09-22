@@ -1,7 +1,0 @@
-"variable","inferred_type","n","missing_n","missing_pct","unique_n"
-"backbone","categorical",12,0,0,3
-"method","categorical",12,0,0,4
-"canonical","continuous",12,0,0,9
-"unseen_answer","continuous",12,0,0,10
-"unseen_decision","continuous",12,0,0,10
-"permutation_behavior","categorical",12,0,0,5

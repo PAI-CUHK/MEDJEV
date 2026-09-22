@@ -1,7 +1,0 @@
-"colour_1","colour_2","luminance_gap","grayscale_risk","action"
-"#2C6EAB","#D9772B",0.133235294117647,FALSE,"pass"
-"#2C6EAB","#7B5A8E",0.0015592156862746,TRUE,"add shape/line type/pattern or change lightness"
-"#2C6EAB","#1B8A5A",0.0414243137254902,TRUE,"add shape/line type/pattern or change lightness"
-"#D9772B","#7B5A8E",0.131676078431372,FALSE,"pass"
-"#D9772B","#1B8A5A",0.0918109803921569,TRUE,"add shape/line type/pattern or change lightness"
-"#7B5A8E","#1B8A5A",0.0398650980392156,TRUE,"add shape/line type/pattern or change lightness"

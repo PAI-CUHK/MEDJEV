@@ -3,13 +3,10 @@ title: "MEDJEV: JEV-inspired semantic evidence decisions for clinical AI researc
 message: "If you use MEDJEV, please cite the repository and the specific version used."
 type: software
 authors:
-  - family-names: "MEDJEV contributors"
-    given-names: ""
-    affiliation: ""
+  - name: "MEDJEV contributors"
 version: 0.1.0
 date-released: 2026-09-23
 license: MIT
-repository-code: "https://github.com/OWNER/MEDJEV"
 abstract: >-
   An independent research implementation of JEV-inspired runtime candidate
   queries for clinical evidence relationships, with an experimental sleep-signal

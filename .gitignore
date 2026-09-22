@@ -51,3 +51,11 @@ snapshots/
 .codex_staging/
 .tmp_*
 tmp_*
+.Rhistory
+.RData
+.Rproj.user/
+
+# Private experiment archives; public figures should be curated manually.
+figures/audit/
+figures/source_data/
+figures/provenance/

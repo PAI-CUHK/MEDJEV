@@ -1,4 +1,0 @@
-"panel","evidential_role","unique_question","medium","source","data_status"
-"a","absolute benchmark","How accurate is each method on the canonical schema?","quantitative","figures/source_data/pubmedqa_dev_performance.csv","verified"
-"b","wording transfer","How accurate is each method on unseen answer wording?","quantitative","figures/source_data/pubmedqa_dev_performance.csv","verified"
-"c","decision semantics","How accurate is each method on unseen decision wording?","quantitative","figures/source_data/pubmedqa_dev_performance.csv","verified"

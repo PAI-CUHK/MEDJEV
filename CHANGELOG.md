@@ -11,10 +11,10 @@ All notable changes to this project will be documented here.
 - Model-free query contract example and CPU-safe test suite.
 - Architecture, installation, development, data, benchmark, and release documentation.
 - GitHub Actions test/build workflow.
-- Editable logo, architecture diagram, and preliminary evaluation chart assets.
+- Editable logo, architecture diagram, and a selective benchmark comparison figure.
 
 ### Notes
 
 - This is an alpha research release.
-- Datasets, credentials, model checkpoints, and generated result archives are not included.
+- Datasets, credentials, model checkpoints, and local experiment archives are not included.
 - Clinical deployment and clinical validity are explicitly out of scope.

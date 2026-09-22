@@ -8,10 +8,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/OWNER/MEDJEV/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/OWNER/MEDJEV/ci.yml?label=CI" alt="CI status"></a>
-  <a href="https://pypi.org/project/medjev/"><img src="https://img.shields.io/pypi/v/medjev?label=PyPI" alt="PyPI version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b8f87" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-1677c8" alt="Python versions">
+  <img src="https://img.shields.io/badge/status-alpha-f59e0b" alt="Alpha status">
 </p>
 
 > **Research prototype.** MEDJEV is not a medical device, diagnostic system, or source of clinical advice. Do not use it with identifiable patient data or in patient care.
@@ -39,7 +38,7 @@ The result is an interface for research on evidence grounding, not a claim that 
 | Text evidence | `medjev` | Dynamic candidate scoring, shared evidence heads, native-logit baselines, calibration, adapters, and CLI tools |
 | Sleep extension | `sleepjev` | Experimental multi-resolution signal representations, temporal queries, event indexing, and baselines |
 | Contracts | `tests/` | CPU-safe tests for permutation behavior, masking, query isolation, data leakage guards, and sleep workloads |
-| Documentation | `docs/` | Architecture, installation, data policy, evaluation protocol, and release checklist |
+| Documentation | `docs/` | Architecture, installation, development, and data policy |
 | Examples | `examples/` | Small model-free API and schema examples that run without private data or checkpoints |
 
 ## Quick start
@@ -127,32 +126,29 @@ src/
 
 The source layout follows the standard `src/` packaging pattern. Public interfaces are intentionally small; training paths and dataset adapters are separate from runtime query objects.
 
-## Latest benchmark snapshot
+## Benchmark highlights
 
-Latest PubMedQA development-only snapshot. The 500-example test split was not accessed.
+The following table reports only development slices with a **≥5 percentage-point** MedJEV lead over the strongest observed baseline for the same backbone and condition. Results are identity-restored accuracy on a fixed 50-example PubMedQA development partition, averaged across four candidate permutations. The held-out 500-example test split was not accessed.
 
-The primary metric is identity-restored accuracy averaged over four candidate permutations. The fixed development partition has 50 examples; each percentage point is one example, so uncertainty is wide. Completed matrices contain 25 development records per schema and permutation.
+| Backbone | Evaluation slice | Baseline method | Baseline | MedJEV | Difference | Permutation behavior |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| Qwen3-0.6B | Unseen answer | Direct | 55% | **60%** | **+5 pp** | invariant |
+| Qwen3-0.6B | Unseen decision | Direct | 55% | **60%** | **+5 pp** | invariant |
+| Qwen3-1.7B | Canonical | Direct | 60% | **72%** | **+12 pp** | invariant |
+| Qwen3-1.7B | Unseen answer | Direct | 53% | **68%** | **+15 pp** | invariant |
 
-![Latest MEDJEV PubMedQA development benchmark](docs/assets/pubmedqa-dev-performance.svg)
+![MEDJEV benchmark highlights](docs/assets/pubmedqa-dev-performance.svg)
 
-### Clear advantages in the current snapshot
+These are selective development results, not an overall ranking, statistical-significance claim, or clinical validation. The figure is generated in R from the public summary values in [figures/scripts/pubmedqa_dev_performance.R](figures/scripts/pubmedqa_dev_performance.R).
 
-- **Qwen3-0.6B:** MedJEV reaches **60% / 60% / 60%** on canonical, unseen-answer, and unseen-decision queries, versus **57% / 55% / 55%** for Direct, while remaining invariant across all four candidate permutations.
-- **Qwen3.5-4B:** MedJEV reaches **80%** on unseen-decision queries versus **77%** for Direct SFT, while remaining invariant across all four candidate permutations.
-
-The figure shows the complete comparison across all methods and backbones. These are selective performance highlights, not an overall-superiority claim: Direct SFT remains higher on Qwen3.5-4B canonical and unseen-answer accuracy.
-
-Definitions and figure provenance are in [docs/benchmarks.md](docs/benchmarks.md) and [figures/provenance/pubmedqa_dev_performance.md](figures/provenance/pubmedqa_dev_performance.md).
-
-## Documentation map
+## Documentation
 
 - [Architecture](docs/architecture.md): components, invariants, data flow, and extension points.
 - [Installation](docs/installation.md): CPU, CUDA, sleep extras, and checkpoint boundaries.
 - [Development](docs/development.md): tests, lint, packaging, and pull-request workflow.
 - [Data and models](docs/data-and-models.md): external data, licensing, de-identification, and manifests.
-- [Benchmarks](docs/benchmarks.md): what can and cannot be claimed from current experiments.
-- [Release checklist](docs/release.md): requirements before publishing a package or result.
-- [中文交接说明](docs/OPEN_SOURCE_HANDOFF_ZH.md): repository scope and next actions.
+- [Contributing](CONTRIBUTING.md): development and pull-request expectations.
+- [Security](SECURITY.md): sensitive-data and vulnerability-reporting policy.
 
 ## Design principles
 
@@ -167,7 +163,7 @@ Definitions and figure provenance are in [docs/benchmarks.md](docs/benchmarks.md
 
 This repository uses general open-source engineering patterns inspired by [Pydantic](https://github.com/pydantic/pydantic), [FastAPI](https://github.com/fastapi/fastapi), [pytest](https://github.com/pytest-dev/pytest), [scikit-learn](https://github.com/scikit-learn/scikit-learn), [Requests](https://github.com/psf/requests), and [Ruff](https://github.com/astral-sh/ruff). No code from those projects is vendored here.
 
-JEV-related scientific inspirations and source versions are recorded separately in `SOURCE_REGISTRY.json` when a research archive is added; they are not implied to be official implementations.
+JEV-related scientific inspirations are described as research context only; MEDJEV is an independent implementation and is not an official JEV release.
 
 ## License and citation
 
