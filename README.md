@@ -2,9 +2,10 @@
   <img src="docs/assets/medjev-logo.svg" alt="MEDJEV logo" width="520">
 </p>
 
+<h2 align="center">Evidence-grounded decisions with runtime-defined semantics</h2>
+
 <p align="center">
-  <strong>Evidence-grounded decisions with runtime-defined semantics.</strong><br>
-  Clinical text · Biomedical literature · Sleep signals · Auditable benchmarks
+  <em>Clinical text · Biomedical literature · Sleep signals · Auditable benchmarks</em>
 </p>
 
 <p align="center">
@@ -14,13 +15,13 @@
   <img src="https://img.shields.io/badge/status-alpha-f59e0b" alt="Alpha status">
 </p>
 
-> [!WARNING]
-> **Research prototype · not for clinical use**
->
-> MEDJEV is not a medical device, diagnostic system, or source of clinical advice. Do not use it with identifiable patient data or in patient care.
+<h3>Research implementation for JEV-inspired evidence reasoning</h3>
 
-> [!NOTE]
-> **JEV-inspired core.** MEDJEV is an independent research implementation that treats a clinical record, a proposed statement, and an explicit candidate meaning set as a programmable evidence-relationship query. The default semantic space is `supported / contradicted / unresolved`; custom candidate sets are accepted but remain unvalidated unless matching calibration metadata exists.
+<p>
+  <strong>MEDJEV</strong> is an independent JEV-inspired research implementation. It treats a clinical record, a proposed statement, and an explicit candidate meaning set as a programmable evidence-relationship query. The default semantic space is <code>supported / contradicted / unresolved</code>; custom candidate sets are accepted but remain unvalidated unless matching calibration metadata exists.
+</p>
+
+<p><em>Research prototype: MEDJEV is not a medical device, diagnostic system, or source of clinical advice. Do not use it with identifiable patient data or in patient care.</em></p>
 
 ![JEV-inspired MEDJEV architecture](docs/assets/jev-architecture.png)
 
