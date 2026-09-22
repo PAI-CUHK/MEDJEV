@@ -8,6 +8,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/liuyisi123/MEDJEV/actions/workflows/ci.yml"><img src="https://github.com/liuyisi123/MEDJEV/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b8f87" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-1677c8" alt="Python versions">
   <img src="https://img.shields.io/badge/status-alpha-f59e0b" alt="Alpha status">

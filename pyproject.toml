@@ -51,6 +51,12 @@ all = [
 [project.scripts]
 medjev = "medjev.cli:main"
 
+[project.urls]
+Homepage = "https://github.com/liuyisi123/MEDJEV"
+Repository = "https://github.com/liuyisi123/MEDJEV"
+Issues = "https://github.com/liuyisi123/MEDJEV/issues"
+Changelog = "https://github.com/liuyisi123/MEDJEV/blob/main/CHANGELOG.md"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 include = ["medjev*", "sleepjev*"]
