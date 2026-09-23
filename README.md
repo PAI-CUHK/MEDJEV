@@ -25,6 +25,8 @@
 
 ![JEV-inspired MEDJEV architecture](docs/assets/jev-architecture.png)
 
+![Animated JEV-inspired runtime evidence flow](docs/assets/jev-runtime-flow.gif)
+
 ### Interactive architecture demo
 
 See the JEV-inspired flow in motion: [**open the interactive MEDJEV / SLEEPJEV demo**](docs/demo/jev-demo.html). It is a self-contained, dependency-free animation showing how one shared evidence representation can answer multiple runtime-defined questions and return auditable candidate probabilities.
