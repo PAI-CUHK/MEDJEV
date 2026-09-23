@@ -20,7 +20,18 @@ dependencies = [
     "transformers>=4.51,<5",
     "safetensors>=0.4",
 ]
-keywords = ["medical-ai", "clinical-nlp", "evidence-reasoning", "jEV", "sleep-analysis"]
+keywords = [
+    "jev",
+    "system-one",
+    "typed-decisions",
+    "calibrated-probabilities",
+    "runtime-semantics",
+    "medical-ai",
+    "clinical-nlp",
+    "biomedical-nlp",
+    "evidence-reasoning",
+    "sleep-analysis",
+]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",

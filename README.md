@@ -18,7 +18,7 @@
 <h3>Research implementation for JEV-inspired evidence reasoning</h3>
 
 <p>
-  <strong>MEDJEV</strong> is an independent JEV-inspired research implementation. It treats a clinical record, a proposed statement, and an explicit candidate meaning set as a programmable evidence-relationship query. The default semantic space is <code>supported / contradicted / unresolved</code>; custom candidate sets are accepted but remain unvalidated unless matching calibration metadata exists.
+  <strong>MEDJEV</strong> is an independent JEV-inspired, System One-style research implementation for typed decisions over clinical evidence and biomedical text. It treats a clinical record, a proposed statement, and an explicit candidate meaning set as a programmable evidence-relationship query. The default semantic space is <code>supported / contradicted / unresolved</code>; custom candidate sets are accepted but remain unvalidated unless matching calibration metadata exists.
 </p>
 
 <p><em>Research prototype: MEDJEV is not a medical device, diagnostic system, or source of clinical advice. Do not use it with identifiable patient data or in patient care.</em></p>
@@ -30,6 +30,8 @@
 ### Interactive architecture demo
 
 See the JEV-native decision pattern in motion: [**open the interactive MEDJEV / SLEEPJEV demo**](docs/demo/jev-demo.html). It is a self-contained, dependency-free animation showing one shared state, parallel `Choice` / `Score` / `Noul` questions, and typed answers with explicit probabilities instead of generated prose.
+
+For the terminology and scope of this independent implementation, see [JEV and System One terminology](docs/jev.md). MEDJEV is not the official TypeSafe AI Jev model or SDK; the shared terms describe the research design pattern that this repository studies in biomedical settings.
 
 ## Why this repository exists
 
