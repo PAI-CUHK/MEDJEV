@@ -24,6 +24,8 @@
 
 <p><em>Research prototype: MEDJEV is not a medical device, diagnostic system, or source of clinical advice. Do not use it with identifiable patient data or in patient care.</em></p>
 
+> **Project identity.** MEDJEV is not the official TypeSafe AI Jev API, SDK, hosted service, or a reproduction of proprietary Jev weights. It is an independent JEV-inspired research implementation for typed evidence decisions in biomedical settings.
+
 ![JEV-inspired MEDJEV architecture](docs/assets/jev-architecture.png)
 
 ![Animated JEV-inspired runtime evidence flow](docs/assets/jev-runtime-flow.gif)
@@ -35,6 +37,10 @@ See the JEV-native decision pattern in motion: [**open the interactive MEDJEV / 
 **Project site:** [**pai-cuhk.github.io/MEDJEV**](https://pai-cuhk.github.io/MEDJEV/) — a polished interactive overview of the MEDJEV architecture, JEV-inspired decision pattern, and SLEEPJEV relationship.
 
 For the terminology and scope of this independent implementation, see [JEV and System One terminology](docs/jev.md). MEDJEV is not the official TypeSafe AI Jev model or SDK; the shared terms describe the research design pattern that this repository studies in biomedical settings.
+
+### Directory-ready description
+
+> Independent JEV-inspired typed decision research for clinical evidence and biomedical text, with runtime `Choice` / `Score` / `Noul`-style questions, explicit candidate probabilities, calibration metadata, and an experimental SLEEPJEV signal extension.
 
 ## Why this repository exists
 

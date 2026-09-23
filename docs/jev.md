@@ -2,6 +2,8 @@
 
 MEDJEV is an independent research implementation inspired by the public JEV / System One design pattern. It is intended to be discoverable by researchers looking for **JEV**, **System One**, **typed decisions**, **calibrated probabilities**, **clinical evidence reasoning**, **biomedical NLP**, and **sleep-signal decision models**.
 
+MEDJEV is **not** the official TypeSafe AI Jev API, SDK, hosted service, or a reproduction of proprietary Jev weights. The shared terminology describes a research design pattern; it does not imply affiliation, endorsement, compatibility, or access to the official Jev model.
+
 ## What the JEV pattern means here
 
 The public JEV description frames a decision model as a shared `state` evaluated by explicit typed questions. The answer is structured and probabilistic rather than a generated paragraph. MEDJEV adapts that pattern to biomedical evidence:
@@ -33,5 +35,11 @@ These names describe the public JEV-style interface pattern; they do not imply t
 - [Jev SDK guide](https://www.jevtypesafe.org/docs/jev-sdk/)
 - [jev-mcp: typed judgments and probabilities](https://github.com/jkudish/jev-mcp)
 - [MEDJEV architecture](architecture.md)
+
+## Directory-ready project description
+
+Use the following wording when listing MEDJEV in a research directory or an independent JEV project gallery:
+
+> Independent JEV-inspired typed decision research for clinical evidence and biomedical text, with runtime `Choice` / `Score` / `Noul`-style questions, explicit candidate probabilities, calibration metadata, and an experimental SLEEPJEV signal extension.
 
 MEDJEV remains research software. Its benchmark snapshots are not clinical validation, and no patient data, hosted API credentials, model weights, or private experiment archives belong in this repository.
