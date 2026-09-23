@@ -32,6 +32,8 @@
 
 See the JEV-native decision pattern in motion: [**open the interactive MEDJEV / SLEEPJEV demo**](docs/demo/jev-demo.html). It is a self-contained, dependency-free animation showing one shared state, parallel `Choice` / `Score` / `Noul` questions, and typed answers with explicit probabilities instead of generated prose.
 
+**Project site:** [**liuyisi123.github.io/MEDJEV**](https://liuyisi123.github.io/MEDJEV/) — a polished interactive overview of the MEDJEV architecture, JEV-inspired decision pattern, and SLEEPJEV relationship.
+
 For the terminology and scope of this independent implementation, see [JEV and System One terminology](docs/jev.md). MEDJEV is not the official TypeSafe AI Jev model or SDK; the shared terms describe the research design pattern that this repository studies in biomedical settings.
 
 ## Why this repository exists
