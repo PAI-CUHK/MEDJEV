@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive animation of the JEV-inspired MEDJEV and SLEEPJEV evidence reasoning architecture.">
+  <title>JEV-inspired evidence reasoning · MEDJEV</title>
+  <style>
+    :root {
+      --ink: #103a43;
+      --muted: #668087;
+      --teal: #0b9f95;
+      --teal-dark: #087a83;
+      --mint: #b7f2e9;
+      --blue: #1677c8;
+      --amber: #f59e0b;
+      --purple: #7257b8;
+      --paper: #f7fbfb;
+      --line: #d9e9e9;
+      --shadow: 0 24px 70px rgba(16, 58, 67, .13);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: radial-gradient(circle at 10% 0%, #e8fbf7 0, transparent 35%),
+                  radial-gradient(circle at 100% 10%, #eef5ff 0, transparent 32%), var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; padding: 48px 0 60px; }
+    .hero { display: grid; grid-template-columns: 1.12fr .88fr; gap: 42px; align-items: center; margin-bottom: 34px; }
+    .eyebrow { color: var(--teal-dark); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 11px 0 15px; max-width: 730px; font-size: clamp(38px, 6vw, 72px); line-height: .98; letter-spacing: -.055em; }
+    .lead { max-width: 680px; margin: 0; color: var(--muted); font-size: 18px; line-height: 1.6; }
+    .mark { justify-self: end; width: min(300px, 80%); filter: drop-shadow(0 18px 28px rgba(8, 122, 131, .16)); }
+    .panel { overflow: hidden; border: 1px solid rgba(16, 58, 67, .1); border-radius: 28px; background: rgba(255,255,255,.82); box-shadow: var(--shadow); backdrop-filter: blur(12px); }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 22px; border-bottom: 1px solid var(--line); }
+    .toolbar strong { font-size: 15px; }
+    .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    button { border: 1px solid #cfe2e2; border-radius: 999px; padding: 9px 14px; color: var(--ink); background: white; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; transition: .2s ease; }
+    button:hover, button:focus-visible { border-color: var(--teal); color: var(--teal-dark); transform: translateY(-1px); outline: none; }
+    button.primary { border-color: var(--teal); color: white; background: var(--teal); }
+    .modes { display: flex; gap: 8px; padding: 18px 22px 0; }
+    .mode.active { color: white; border-color: var(--ink); background: var(--ink); }
+    .stage { position: relative; min-height: 555px; padding: 26px 24px 34px; }
+    .stage-head { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin: 0 0 24px; }
+    .stage-head h2 { margin: 0; font-size: 22px; letter-spacing: -.02em; }
+    .stage-head p { max-width: 500px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; text-align: right; }
+    .flow { display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr; gap: 8px; align-items: center; }
+    .node { position: relative; min-height: 242px; padding: 20px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.92); transition: .45s ease; }
+    .node.active { border-color: var(--teal); box-shadow: 0 0 0 5px rgba(11,159,149,.1), 0 16px 34px rgba(11,159,149,.12); transform: translateY(-5px); }
+    .node.done { border-color: #a6d9d3; }
+    .node .number { display: inline-grid; place-items: center; width: 29px; height: 29px; border-radius: 50%; color: white; background: var(--teal); font-size: 13px; font-weight: 700; }
+    .node h3 { margin: 17px 0 9px; font-size: 17px; }
+    .node p { min-height: 58px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .code { margin-top: 17px; padding: 11px; border-radius: 11px; color: #335b62; background: #eef8f7; font: 12px/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .arrow { color: #9bb8bc; font-size: 24px; text-align: center; transition: .4s ease; }
+    .arrow.lit { color: var(--teal); transform: scale(1.3); }
+    .particle { position: absolute; z-index: 3; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 7px rgba(245,158,11,.16); opacity: 0; pointer-events: none; }
+    .particle.run { animation: travel 1.15s ease-in-out; }
+    @keyframes travel { 0% { opacity: 0; transform: translateX(0) scale(.6); } 15% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateX(var(--travel)) scale(1); } }
+    .candidate-list { display: grid; gap: 7px; margin-top: 16px; }
+    .candidate { display: flex; justify-content: space-between; gap: 10px; padding: 8px 10px; border-radius: 9px; background: #f3f8fa; color: #49666d; font-size: 12px; }
+    .candidate b { color: var(--ink); }
+    .candidate.highlight { color: var(--teal-dark); background: #dff7f2; }
+    .candidate .bar { width: 55px; height: 6px; align-self: center; overflow: hidden; border-radius: 5px; background: #d4e6e7; }
+    .candidate .bar i { display: block; width: var(--value); height: 100%; border-radius: inherit; background: var(--teal); }
+    .caption { margin: 20px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; text-align: center; }
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+    .principle { padding: 21px; border: 1px solid var(--line); border-radius: 18px; background: white; }
+    .principle b { display: block; margin-bottom: 8px; font-size: 14px; }
+    .principle span { color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .footer { margin-top: 28px; color: var(--muted); font-size: 12px; text-align: center; }
+    .footer a { color: var(--teal-dark); font-weight: 700; text-decoration: none; }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 22px; } .mark { justify-self: start; width: 210px; } .flow { grid-template-columns: 1fr; gap: 10px; } .arrow { transform: rotate(90deg); } .stage { min-height: 0; } .stage-head { display: block; } .stage-head p { margin-top: 8px; text-align: left; } }
+    @media (max-width: 620px) { .shell { width: min(100% - 22px, 1180px); padding-top: 28px; } .toolbar { align-items: start; flex-direction: column; } .principles { grid-template-columns: 1fr; } h1 { font-size: 45px; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">JEV-inspired runtime semantics</div>
+        <h1>One evidence state.<br><span style="color:var(--teal)">Many questions.</span></h1>
+        <p class="lead">MEDJEV separates evidence formation from semantic decisions. The query supplies the question and its candidate meanings at runtime; the model returns a probability distribution that can be inspected and audited.</p>
+      </div>
+      <img class="mark" src="../assets/medjev-logo.svg" alt="MEDJEV logo">
+    </section>
+
+    <section class="panel" aria-label="Interactive JEV architecture animation">
+      <div class="toolbar">
+        <strong>Explore the decision pipeline</strong>
+        <div class="controls">
+          <button class="primary" id="play">▶ Play</button>
+          <button id="step">Step</button>
+          <button id="reset">Replay</button>
+        </div>
+      </div>
+      <div class="modes" role="tablist" aria-label="Application mode">
+        <button class="mode active" data-mode="medjev">MEDJEV · clinical text</button>
+        <button class="mode" data-mode="sleepjev">SLEEPJEV · overnight PSG</button>
+      </div>
+      <div class="stage">
+        <div class="stage-head">
+          <h2 id="scenario-title">From clinical evidence to an explicit decision</h2>
+          <p id="scenario-copy">The expensive evidence representation is shared. Only the runtime question and candidate meanings change.</p>
+        </div>
+        <div class="flow">
+          <article class="node" data-step="0">
+            <span class="number">1</span><h3 id="evidence-title">Evidence</h3>
+            <p id="evidence-copy">A clinical record and biomedical passage provide the evidence context.</p>
+            <div class="code" id="evidence-code">record → shared evidence state</div>
+          </article><div class="arrow" data-arrow="0">→</div>
+          <article class="node" data-step="1">
+            <span class="number">2</span><h3>Runtime question</h3>
+            <p id="question-copy">The question is supplied when the query is made, not frozen into a label head.</p>
+            <div class="code" id="question-code">query.question = “Does the evidence support this?”</div>
+          </article><div class="arrow" data-arrow="1">→</div>
+          <article class="node" data-step="2">
+            <span class="number">3</span><h3>Candidate meanings</h3>
+            <p id="candidate-copy">The valid meanings are explicit and can be changed for a new query.</p>
+            <div class="candidate-list" id="candidates">
+              <div class="candidate highlight"><b>supported</b><span class="bar"><i style="--value:74%"></i></span></div>
+              <div class="candidate"><b>contradicted</b><span class="bar"><i style="--value:16%"></i></span></div>
+              <div class="candidate"><b>unresolved</b><span class="bar"><i style="--value:10%"></i></span></div>
+            </div>
+          </article><div class="arrow" data-arrow="2">→</div>
+          <article class="node" data-step="3">
+            <span class="number">4</span><h3>Auditable output</h3>
+            <p id="output-copy">Probabilities are normalized over the supplied set and retain their schema scope.</p>
+            <div class="code" id="output-code">P(supported)=0.74<br>schema = runtime-v1</div>
+          </article>
+        </div>
+        <span class="particle" aria-hidden="true"></span>
+        <p class="caption" id="caption">The semantic choice is delayed until query time: this is the defining JEV-inspired move.</p>
+      </div>
+    </section>
+
+    <section class="principles" aria-label="Core principles">
+      <div class="principle"><b>Shared representation</b><span>Encode the supplied evidence once, then reuse it across explicit questions.</span></div>
+      <div class="principle"><b>Runtime candidate set</b><span>Meaning follows the candidate identity, not its position in a fixed classifier head.</span></div>
+      <div class="principle"><b>Inspectable decision</b><span>Return probabilities together with schema, calibration, and audit scope.</span></div>
+    </section>
+    <p class="footer">Research demonstration only · <a href="../../README.md">Back to the MEDJEV repository</a> · <a href="https://github.com/PAI-CUHK/SLEEPJEV">Related: SLEEPJEV</a></p>
+  </main>
+  <script>
+    const state = { step: 0, playing: false, mode: 'medjev', timer: null };
+    const els = {
+      nodes: [...document.querySelectorAll('.node')], arrows: [...document.querySelectorAll('.arrow')],
+      play: document.querySelector('#play'), particle: document.querySelector('.particle'),
+      title: document.querySelector('#scenario-title'), copy: document.querySelector('#scenario-copy'),
+      evidenceTitle: document.querySelector('#evidence-title'), evidenceCopy: document.querySelector('#evidence-copy'), evidenceCode: document.querySelector('#evidence-code'),
+      questionCopy: document.querySelector('#question-copy'), questionCode: document.querySelector('#question-code'), candidateCopy: document.querySelector('#candidate-copy'), outputCopy: document.querySelector('#output-copy'), outputCode: document.querySelector('#output-code'), caption: document.querySelector('#caption')
+    };
+    const scenes = {
+      medjev: {
+        title: 'From clinical evidence to an explicit decision', copy: 'The expensive evidence representation is shared. Only the runtime question and candidate meanings change.',
+        evidenceTitle: 'Evidence', evidenceCopy: 'A clinical record and biomedical passage provide the evidence context.', evidenceCode: 'record → shared evidence state',
+        questionCopy: 'The question is supplied when the query is made, not frozen into a label head.', questionCode: 'query.question = “Does the evidence support this?”', candidateCopy: 'The valid meanings are explicit and can be changed for a new query.', outputCopy: 'Probabilities are normalized over the supplied set and retain their schema scope.', outputCode: 'P(supported)=0.74\nschema = runtime-v1', caption: 'The semantic choice is delayed until query time: this is the defining JEV-inspired move.'
+      },
+      sleepjev: {
+        title: 'From one overnight PSG to many sleep questions', copy: 'SLEEPJEV reuses a long-horizon signal representation while each query selects its own time window and meanings.',
+        evidenceTitle: 'Overnight PSG', evidenceCopy: 'One recording is encoded into reusable multi-resolution temporal states.', evidenceCode: 'PSG → overnight cache → serving index',
+        questionCopy: 'A SleepQuery selects target, window, stage, position, and query type at runtime.', questionCode: 'query.window = “first 2h · REM”', candidateCopy: 'The candidate set can describe stages, events, or an explicit sleep question.', outputCopy: 'The query-conditioned scorer returns probabilities with the selected scope.', outputCode: 'P(REM)=0.68\nwindow = first-2h', caption: 'The same shared state can serve many explicit questions without re-encoding the overnight signal.'
+      }
+    };
+    function applyScene() {
+      const s = scenes[state.mode];
+      Object.entries({title:s.title,copy:s.copy,evidenceTitle:s.evidenceTitle,evidenceCopy:s.evidenceCopy,evidenceCode:s.evidenceCode,questionCopy:s.questionCopy,questionCode:s.questionCode,candidateCopy:s.candidateCopy,outputCopy:s.outputCopy,outputCode:s.outputCode,caption:s.caption}).forEach(([key, value]) => els[key].textContent = value);
+    }
+    function render() {
+      els.nodes.forEach((node, i) => { node.classList.toggle('active', i === state.step); node.classList.toggle('done', i < state.step); });
+      els.arrows.forEach((arrow, i) => arrow.classList.toggle('lit', i < state.step));
+      els.play.textContent = state.playing ? '❚❚ Pause' : '▶ Play';
+    }
+    function pulse() {
+      els.particle.classList.remove('run'); void els.particle.offsetWidth; els.particle.style.setProperty('--travel', `${Math.min(780, window.innerWidth * .62)}px`); els.particle.classList.add('run');
+    }
+    function advance() { state.step = (state.step + 1) % 4; pulse(); render(); }
+    function start() { if (state.playing) return; state.playing = true; render(); state.timer = setInterval(advance, 1700); }
+    function stop() { state.playing = false; clearInterval(state.timer); render(); }
+    els.play.addEventListener('click', () => state.playing ? stop() : start());
+    document.querySelector('#step').addEventListener('click', () => { stop(); advance(); });
+    document.querySelector('#reset').addEventListener('click', () => { stop(); state.step = 0; render(); });
+    document.querySelectorAll('.mode').forEach(button => button.addEventListener('click', () => { stop(); state.mode = button.dataset.mode; document.querySelectorAll('.mode').forEach(b => b.classList.toggle('active', b === button)); applyScene(); state.step = 0; render(); }));
+    applyScene(); render();
+  </script>
+</body>
+</html>

@@ -25,6 +25,10 @@
 
 ![JEV-inspired MEDJEV architecture](docs/assets/jev-architecture.png)
 
+### Interactive architecture demo
+
+See the JEV-inspired flow in motion: [**open the interactive MEDJEV / SLEEPJEV demo**](docs/demo/jev-demo.html). It is a self-contained, dependency-free animation showing how one shared evidence representation can answer multiple runtime-defined questions and return auditable candidate probabilities.
+
 ## Why this repository exists
 
 Medical language systems often collapse several different questions into one generated answer. MEDJEV separates the responsibilities:
