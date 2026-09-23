@@ -63,10 +63,10 @@ all = [
 medjev = "medjev.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/liuyisi123/MEDJEV"
-Repository = "https://github.com/liuyisi123/MEDJEV"
-Issues = "https://github.com/liuyisi123/MEDJEV/issues"
-Changelog = "https://github.com/liuyisi123/MEDJEV/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/PAI-CUHK/MEDJEV"
+Repository = "https://github.com/PAI-CUHK/MEDJEV"
+Issues = "https://github.com/PAI-CUHK/MEDJEV/issues"
+Changelog = "https://github.com/PAI-CUHK/MEDJEV/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["src"]

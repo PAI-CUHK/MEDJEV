@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/liuyisi123/MEDJEV/actions/workflows/ci.yml"><img src="https://github.com/liuyisi123/MEDJEV/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
-  <a href="https://github.com/liuyisi123/MEDJEV/releases"><img src="https://img.shields.io/github/v/release/liuyisi123/MEDJEV?include_prereleases&label=release" alt="Latest release"></a>
+  <a href="https://github.com/PAI-CUHK/MEDJEV/actions/workflows/ci.yml"><img src="https://github.com/PAI-CUHK/MEDJEV/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="https://github.com/PAI-CUHK/MEDJEV/releases"><img src="https://img.shields.io/github/v/release/PAI-CUHK/MEDJEV?include_prereleases&label=release" alt="Latest release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b8f87" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-1677c8" alt="Python versions">
   <img src="https://img.shields.io/badge/status-alpha-f59e0b" alt="Alpha status">
@@ -32,7 +32,7 @@
 
 See the JEV-native decision pattern in motion: [**open the interactive MEDJEV / SLEEPJEV demo**](docs/demo/jev-demo.html). It is a self-contained, dependency-free animation showing one shared state, parallel `Choice` / `Score` / `Noul` questions, and typed answers with explicit probabilities instead of generated prose.
 
-**Project site:** [**liuyisi123.github.io/MEDJEV**](https://liuyisi123.github.io/MEDJEV/) — a polished interactive overview of the MEDJEV architecture, JEV-inspired decision pattern, and SLEEPJEV relationship.
+**Project site:** [**pai-cuhk.github.io/MEDJEV**](https://pai-cuhk.github.io/MEDJEV/) — a polished interactive overview of the MEDJEV architecture, JEV-inspired decision pattern, and SLEEPJEV relationship.
 
 For the terminology and scope of this independent implementation, see [JEV and System One terminology](docs/jev.md). MEDJEV is not the official TypeSafe AI Jev model or SDK; the shared terms describe the research design pattern that this repository studies in biomedical settings.
 
@@ -240,7 +240,7 @@ These are selective development results, not an overall ranking, statistical-sig
 
 ## Documentation
 
-- [Project site](https://liuyisi123.github.io/MEDJEV/): interactive overview and demo.
+- [Project site](https://pai-cuhk.github.io/MEDJEV/): interactive overview and demo.
 - [Architecture](docs/architecture.md): components, invariants, data flow, and extension points.
 - [JEV terminology](docs/jev.md): typed decisions, `Choice` / `Score` / `Noul`, and scope boundaries.
 - [Installation](docs/installation.md): CPU, CUDA, sleep extras, and checkpoint boundaries.
