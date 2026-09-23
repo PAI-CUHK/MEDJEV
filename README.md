@@ -29,7 +29,7 @@
 
 ### Interactive architecture demo
 
-See the JEV-inspired flow in motion: [**open the interactive MEDJEV / SLEEPJEV demo**](docs/demo/jev-demo.html). It is a self-contained, dependency-free animation showing how one shared evidence representation can answer multiple runtime-defined questions and return auditable candidate probabilities.
+See the JEV-native decision pattern in motion: [**open the interactive MEDJEV / SLEEPJEV demo**](docs/demo/jev-demo.html). It is a self-contained, dependency-free animation showing one shared state, parallel `Choice` / `Score` / `Noul` questions, and typed answers with explicit probabilities instead of generated prose.
 
 ## Why this repository exists
 
