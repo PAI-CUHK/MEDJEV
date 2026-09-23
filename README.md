@@ -10,6 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/liuyisi123/MEDJEV/actions/workflows/ci.yml"><img src="https://github.com/liuyisi123/MEDJEV/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="https://github.com/liuyisi123/MEDJEV/releases"><img src="https://img.shields.io/github/v/release/liuyisi123/MEDJEV?include_prereleases&label=release" alt="Latest release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0b8f87" alt="MIT license"></a>
   <img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-1677c8" alt="Python versions">
   <img src="https://img.shields.io/badge/status-alpha-f59e0b" alt="Alpha status">
@@ -237,7 +238,9 @@ These are selective development results, not an overall ranking, statistical-sig
 
 ## Documentation
 
+- [Project site](https://liuyisi123.github.io/MEDJEV/): interactive overview and demo.
 - [Architecture](docs/architecture.md): components, invariants, data flow, and extension points.
+- [JEV terminology](docs/jev.md): typed decisions, `Choice` / `Score` / `Noul`, and scope boundaries.
 - [Installation](docs/installation.md): CPU, CUDA, sleep extras, and checkpoint boundaries.
 - [Development](docs/development.md): tests, lint, packaging, and pull-request workflow.
 - [Data and models](docs/data-and-models.md): external data, licensing, de-identification, and manifests.
@@ -262,6 +265,8 @@ JEV-related scientific inspirations are described as research context only; MEDJ
 ## License and citation
 
 Software is released under the MIT License. Dataset, model, and third-party source terms remain separate. See [LICENSE](LICENSE), [CITATION.cff](CITATION.cff), and [data-and-models.md](docs/data-and-models.md).
+
+If this repository is useful in research, please cite the version used. GitHub can generate citation formats from [CITATION.cff](CITATION.cff); archived releases should be preferred when a DOI is available.
 
 ## Status
 
